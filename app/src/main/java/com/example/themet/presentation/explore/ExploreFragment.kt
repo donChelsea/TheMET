@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.themet.R
-import com.example.themet.presentation.home.HomeViewModel
 
 class ExploreFragment : Fragment() {
     private lateinit var viewModel: ExploreViewModel
@@ -27,9 +26,11 @@ class ExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(requireActivity())[ExploreViewModel::class.java]
-        viewModel.loadDepartments()
-        viewModel.departments.observe(viewLifecycleOwner, Observer { departments ->
-            Log.d(TAG, departments[0].displayName)
+
+
+        viewModel.loadSingleObject(1)
+        viewModel.singleObject.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "Id: ${it.title}")
         })
     }
 }
